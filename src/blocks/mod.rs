@@ -21,9 +21,8 @@ mod uptime;
 pub mod nvidia_gpu;
 pub mod maildir;
 mod networkmanager;
-mod bluetooth;
 
-use crate::config::Config;
+use config::Config;
 use self::time::*;
 use self::template::*;
 use self::music::*;
@@ -47,10 +46,9 @@ use self::uptime::*;
 use self::nvidia_gpu::*;
 use self::maildir::*;
 use self::networkmanager::*;
-use self::bluetooth::*;
 
 use super::block::{Block, ConfigBlock};
-use crate::errors::*;
+use errors::*;
 use super::scheduler::Task;
 
 extern crate dbus;
@@ -102,7 +100,6 @@ pub fn create_block(name: &str, block_config: Value, config: Config, tx_update_r
             "uptime" => Uptime,
             "nvidia_gpu" => NvidiaGpu,
             "maildir" => Maildir,
-            "networkmanager" => NetworkManager,
-            "bluetooth" => Bluetooth
+            "networkmanager" => NetworkManager
     )
 }

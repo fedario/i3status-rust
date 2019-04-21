@@ -1,10 +1,10 @@
-use crate::config::Config;
-use crate::errors::*;
-use crate::scheduler::Task;
+use config::Config;
+use errors::*;
+use scheduler::Task;
 use chan::Sender;
 use std::time::Duration;
-use crate::input::I3BarEvent;
-use crate::widget::I3BarWidget;
+use input::I3BarEvent;
+use widget::I3BarWidget;
 
 pub trait Block {
     /// Updates the internal state of a Block

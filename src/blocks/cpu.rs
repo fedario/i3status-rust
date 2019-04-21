@@ -1,13 +1,13 @@
 use chan::Sender;
-use crate::scheduler::Task;
+use scheduler::Task;
 use std::time::Duration;
 
-use crate::block::{Block, ConfigBlock};
-use crate::config::Config;
-use crate::de::deserialize_duration;
-use crate::errors::*;
-use crate::widget::{I3BarWidget, State};
-use crate::widgets::text::TextWidget;
+use block::{Block, ConfigBlock};
+use config::Config;
+use de::deserialize_duration;
+use errors::*;
+use widget::{I3BarWidget, State};
+use widgets::text::TextWidget;
 
 use std::fs::File;
 use std::io::prelude::*;

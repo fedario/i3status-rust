@@ -1,12 +1,12 @@
-use crate::de::*;
-use crate::icons;
+use de::*;
+use icons;
 use serde::de::{self, Deserialize, Deserializer};
 use toml::value;
 use std::collections::HashMap as Map;
 use std::marker::PhantomData;
 use std::ops::Deref;
 use std::str::FromStr;
-use crate::themes::{self, Theme};
+use themes::{self, Theme};
 
 #[derive(Deserialize, Debug, Clone)]
 pub struct Config {
