@@ -186,22 +186,35 @@ impl Xrandr {
     fn display(&mut self) -> Result<()> {
         if let Some(m) = self.monitors.get(self.current_idx) {
             let brightness_str = m.brightness.to_string();
+            let brightness_icon = self.config
+                .icons
+                .get("backlight_full")
+                .block_error("xrandr", "cannot find icon")?
+                .to_owned();
+            let resolution_icon = self.config
+                .icons
+                .get("size")
+                .block_error("xrandr", "cannot find icon")?
+                .to_owned();
             let values = map!("{display}" => m.name.clone(),
+                              "{brightness_icon}" => brightness_icon,
                               "{brightness}" => brightness_str,
-                              "{resolution}" => m.resolution.clone());
+                              "{resolution}" => m.resolution.clone(),
+                              "{resolution_icon}" => resolution_icon);
 
             self.text.set_icon("xrandr");
-            let format_str = if self.resolution {
+            let format_str: &str;
+            if self.resolution {
                 if self.icons {
-                    "{display} \u{f185} {brightness} \u{f096} {resolution}"
+                    format_str = "{display} {brightness_icon}{brightness} {resolution_icon}{resolution}";
                 } else {
-                    "{display}: {brightness} [{resolution}]"
+                    format_str = "{display}: {brightness} [{resolution}]";
                 }
             } else if self.icons {
-                "{display} \u{f185} {brightness}"
+                format_str = "{display} {brightness_icon} {brightness}";
             } else {
-                "{display}: {brightness}"
-            };
+                format_str = "{display}: {brightness}";
+            }
 
 
             if let Ok(fmt_template) = FormatTemplate::from_string(format_str) {
